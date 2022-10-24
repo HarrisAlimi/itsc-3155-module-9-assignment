@@ -5,5 +5,19 @@
 {% block body %}
 <h1 class="mb-5">All Movies</h1>
 <p class="mb-3">See our list of movie ratings below</p>
-<!-- TODO: Feature 1 -->
+<table class = "table table-bordered">
+    <tr>
+        <th>Name of Movie:</th>
+        <th>Name of Director:</th>
+        <th>Rating:</th>
+    </tr>
+    <!-- TODO: Feature 1 -->
+    {% for x in my_list %}
+    <tr>
+        <th>{{x[0]}}</th>
+        <th>{{x[1]}}</th>
+        <th>{{x[2]}}/5 Stars</th>
+    </tr>
+    {% endfor %}
+</table>
 {% endblock %}
