@@ -1,5 +1,4 @@
 # TODO: Feature 2
-
 from flask.testing import FlaskClient
 
 def test_create_movies_page(test_app: FlaskClient):
@@ -10,9 +9,9 @@ def test_create_movies_page(test_app: FlaskClient):
 
 def test_create_movies_form(test_app: FlaskClient):
     response = test_app.post('/movies', data={
-        "mname": "Star Wars",
+        "name": "Star Wars",
         "dname": "George Lucas",
-        "rating": 5},
+        "select": 5},
         follow_redirects=True)
 
     response_data = response.data
@@ -21,8 +20,8 @@ def test_create_movies_form(test_app: FlaskClient):
 
 def test_create_movies_bad(test_app:FlaskClient):
     response = test_app.post('/movies', data={
-        "mname": None,
+        "name": None,
         "dname": "George Lucas",
-        "rating": 5})
+        "select": 5})
     assert response.status_code == 404
 

@@ -1,5 +1,4 @@
 # TODO: Feature 2
-
 from src.repositories.movie_repository import get_movie_repository
 from src.models.movie import Movie
 
