@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 movie_repository = get_movie_repository()
 
-ratings = []
+my_dict = {}
 
 
 @app.get('/')
@@ -17,7 +17,7 @@ def index():
 @app.get('/movies')
 def list_all_movies():
     # TODO: Feature 1
-    return render_template('list_all_movies.html', my_list = ratings, list_movies_active=True)
+    return render_template('list_all_movies.html', dict = my_dict, list_movies_active=True)
 
 
 @app.get('/movies/new')
@@ -32,9 +32,8 @@ def create_movie():
     mname = request.form.get('name', type = str)
     dname = request.form.get('dname', type = str)
     rating = request.form.get('select', type = str)
-    rating = [mname, dname, rating]
-    ratings.append(rating)
-    return render_template('list_all_movies.html', my_list = ratings)
+    my_dict[mname] = dname, rating
+    return render_template('list_all_movies.html', dict = my_dict)
 
 
 @app.get('/movies/search')
