@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 movie_repository = get_movie_repository()
 
-ratings = []
+ratings = {}
 
 
 @app.get('/')
@@ -32,12 +32,18 @@ def create_movie():
     mname = request.form.get('name', type = str)
     dname = request.form.get('dname', type = str)
     rating = request.form.get('select', type = str)
-    rating = [mname, dname, rating]
-    ratings.append(rating)
-    return render_template('list_all_movies.html', my_list = ratings)
+    
+    movie = Movie(mname, dname, rating)
+    ratings.append(movie)
+    
+    return render_template('list_all_movies.html', my_lifst = ratings)
 
 
 @app.get('/movies/search')
 def search_movies():
     # TODO: Feature 3
+    for movie in ratings:
+        if movie.title == 'A':
+            print(movie)
+        
     return render_template('search_movies.html', search_active=True)
