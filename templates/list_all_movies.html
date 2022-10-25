@@ -12,11 +12,11 @@
         <th>Rating:</th>
     </tr>
     <!-- TODO: Feature 1 -->
-    {% for key, value in dict.items() %}
+    {% for x in get_all_movies %}
     <tr>
-        <th>{{key}}</th>
-        <th>{{value[0]}}</th>
-        <th>{{value[1]}}/5 Stars</th>
+        <th>{{x.title}}</th>
+        <th>{{x.director}}</th>
+        <th>{{x.rating}}</th>
     </tr>
     {% endfor %}
 </table>
