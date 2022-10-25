@@ -9,8 +9,13 @@
 <!-- TODO: Feature 3 -->
 <form action="/movies/search" method="get">
     <div class="input-group">
-        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" id="movie-search" name="movie-search" aria-describedby="search-addon" />
-        <button type="submit" class="btn btn-outline-primary">search</button>
+        <input type="text" class="form-control rounded" placeholder="Search" id="moviesearch" name="moviesearch">
+        <button type="submit" name="submit" class="btn btn-outline-primary">Search</button>
     </div>
 </form>
+
+{% if searchResult != None %}
+    <p>{{searchResult.rating}}/5 for movie {{searchResult.title}}</p>
+{% endif %}
+
 {% endblock %}
