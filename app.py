@@ -21,7 +21,6 @@ def list_all_movies():
 
 @app.get('/movies/new')
 def create_movies_form():
-    print(ratings)
     return render_template('create_movies_form.html', create_rating_active=True)
 
 #@app.post('/movies')
@@ -42,8 +41,11 @@ def create_movie():
 @app.get('/movies/search')
 def search_movies():
     # TODO: Feature 3
+    searchVal = request.args.get('moviesearch', None)
+    searchResult = None
+    
     for movie in ratings:
-        if movie.title == 'A':
-            print(movie)
-        
-    return render_template('search_movies.html', search_active=True)
+        if movie.title == searchVal:
+            searchResult = movie
+    
+    return render_template('search_movies.html', searchResult=searchResult, search_active=True)
