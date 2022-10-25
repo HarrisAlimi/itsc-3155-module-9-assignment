@@ -12,11 +12,11 @@
         <th>Rating:</th>
     </tr>
     <!-- TODO: Feature 1 -->
-    {% for movie in ratings %}
+    {% for x in get_all_movies %}
     <tr>
-        <th>{{movie.title}}</th>
-        <th>{{movie.director}}</th>
-        <th>{{movie.rating}}/5 Stars</th>
+        <th>{{x.title}}</th>
+        <th>{{x.director}}</th>
+        <th>{{x.rating}}</th>
     </tr>
     {% endfor %}
 </table>
