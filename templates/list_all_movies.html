@@ -12,11 +12,11 @@
         <th>Rating:</th>
     </tr>
     <!-- TODO: Feature 1 -->
-    {% for x in my_list %}
+    {% for key, value in dict.items() %}
     <tr>
-        <th>{{x[0]}}</th>
-        <th>{{x[1]}}</th>
-        <th>{{x[2]}}/5 Stars</th>
+        <th>{{key}}</th>
+        <th>{{value[0]}}</th>
+        <th>{{value[1]}}/5 Stars</th>
     </tr>
     {% endfor %}
 </table>
