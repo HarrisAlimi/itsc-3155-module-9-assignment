@@ -15,7 +15,7 @@ def index():
 @app.get('/movies')
 def list_all_movies():
     # TODO: Feature 1
-    return render_template('list_all_movies.html', list_movies_active=True)
+    return render_template('list_all_movies.html', get_all_movies=movie_repository.get_all_movies(), list_movies_active=True)
 
 
 @app.get('/movies/new')
@@ -31,7 +31,7 @@ def create_movie():
     mname = request.form.get('name', type = str)
     dname = request.form.get('dname', type = str)
     rating = request.form.get('select', type = str)
-    if mname is "" or dname is "" or rating is "":
+    if mname == "" or dname == "" or rating == "":
         return render_template("404.html")
     else:
         int_rating = int(rating)
@@ -43,10 +43,16 @@ def create_movie():
 def search_movies():
     # TODO: Feature 3
     searchVal = request.args.get('moviesearch', None)
+    print(searchVal)
     searchResult = None
     
     for movie in movie_repository.get_all_movies():
         if movie.title == searchVal:
             searchResult = movie
+            return render_template('search_movies.html', searchResult=searchResult, search_active=True)
     
-    return render_template('search_movies.html', searchResult=searchResult, search_active=True)
+    if searchVal is None:
+        return render_template('search_movies.html', searchResult=searchResult, search_active=True)
+    
+    # Wrong input / not found
+    return render_template("404.html")

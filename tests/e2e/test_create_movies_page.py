@@ -1,5 +1,4 @@
 # TODO: Feature 2
-
 from flask.testing import FlaskClient
 
 
@@ -23,4 +22,5 @@ def test_create_movies_bad(test_app:FlaskClient):
         "dname": "George Lucas",
         "select": 5,})
     response_data = response.data
+
     assert b'<div class="text-bg-danger p-3">Wrong input provided.</div>' in response_data
