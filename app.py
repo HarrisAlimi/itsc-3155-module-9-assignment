@@ -15,12 +15,14 @@ def index():
 @app.get('/movies')
 def list_all_movies():
     # TODO: Feature 1
-    return render_template('list_all_movies.html', list_movies_active=True)
+    return render_template('list_all_movies.html', get_all_movies=movie_repository.get_all_movies(), list_movies_active=True)
 
 
 @app.get('/movies/new')
 def create_movies_form():
     return render_template('create_movies_form.html', create_rating_active=True)
+
+@app.errorhandler(404)
 
 @app.post('/movies')
 def create_movie():
@@ -29,19 +31,28 @@ def create_movie():
     mname = request.form.get('name', type = str)
     dname = request.form.get('dname', type = str)
     rating = request.form.get('select', type = str)
-    int_rating = int(rating)
-    movie_repository.create_movie(mname, dname, int_rating)
-    return render_template('list_all_movies.html', get_all_movies=movie_repository.get_all_movies(), list_movies_active=True)
+    if mname == "" or dname == "" or rating == "":
+        return render_template("404.html")
+    else:
+        int_rating = int(rating)
+        movie_repository.create_movie(mname, dname, int_rating)
+        return render_template('list_all_movies.html', get_all_movies=movie_repository.get_all_movies(), list_movies_active=True)
 
 
 @app.get('/movies/search')
 def search_movies():
     # TODO: Feature 3
     searchVal = request.args.get('moviesearch', None)
+    print(searchVal)
     searchResult = None
     
     for movie in movie_repository.get_all_movies():
         if movie.title == searchVal:
             searchResult = movie
+            return render_template('search_movies.html', searchResult=searchResult, search_active=True)
     
-    return render_template('search_movies.html', searchResult=searchResult, search_active=True)
+    if searchVal is None:
+        return render_template('search_movies.html', searchResult=searchResult, search_active=True)
+    
+    # Wrong input / not found
+    return render_template("404.html")
